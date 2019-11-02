@@ -29,3 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 // スレッド機能
 Route::resource('threads', 'ThreadsController');
+
+// レスポンス機能
+Route::resource('responses', 'ResponsesController');

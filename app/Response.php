@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Thread extends Model
+class Response extends Model
 {
-    protected $fillable = ['user_id', 'title', 'content'];
+    protected $fillable = ['user_id', 'thread_id', 'content'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
     
-    public function responses()
+    public function thread()
     {
-        return $this->hasMany(Response::class);
+        return $this->belongsTo(Thread::class);
     }
 }

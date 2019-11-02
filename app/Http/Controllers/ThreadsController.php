@@ -23,7 +23,7 @@ class ThreadsController extends Controller
             'title' => 'required|max:100',
             'content' => 'required|max:1200',
         ]);
-
+        
         $request->user()->threads()->create([
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
@@ -31,5 +31,20 @@ class ThreadsController extends Controller
         ]);
 
         return redirect('/');
+    }
+
+    public function show($id)
+    {
+        $thread = Thread::find($id);
+        $responses = $thread->responses()->orderBy('created_at', 'desc')->paginate(10);
+
+        $data = [
+            'thread' => $thread,
+            'responses' => $responses,
+        ];
+
+        $data += $this->counts($thread);
+
+        return view('threads.show', $data);
     }
 }

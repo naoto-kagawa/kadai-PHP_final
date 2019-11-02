@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    public function counts($thread) {
+        $count_responses = $thread->responses()->count();
+
+        return [
+            'count_responses' => $count_responses,
+        ];
+    }
 }
+
